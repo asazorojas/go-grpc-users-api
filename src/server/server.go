@@ -8,11 +8,11 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-type UserServer struct {
-	userpb.UserServer
+type GRPCUsersServiceServer struct {
+	userpb.GRPCUsersServiceServer
 }
 
-func (s *UserServer) GetUser(ctx context.Context, req *userpb.GetUserRequest) (*userpb.GetUserResponse, error) {
+func (s *GRPCUsersServiceServer) GetUser(ctx context.Context, req *userpb.GetUserRequest) (*userpb.GetUserResponse, error) {
 	userID := req.UserId
 
 	if userID == "" {
@@ -40,7 +40,7 @@ func (s *UserServer) GetUser(ctx context.Context, req *userpb.GetUserRequest) (*
 
 }
 
-func (s *UserServer) ListUsers(ctx context.Context, req *userpb.ListUsersRequest) (*userpb.ListUsersResponse, error) {
+func (s *GRPCUsersServiceServer) ListUsers(ctx context.Context, req *userpb.ListUsersRequest) (*userpb.ListUsersResponse, error) {
 	userMessages := make([]*userpb.UserMessage, len(data.Users))
 	for i, u := range data.Users {
 		userMessages[i] = u

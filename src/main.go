@@ -27,7 +27,7 @@ func main() {
 			grpc_logrus.UnaryServerInterceptor(logrusEntry),
 		)),
 	)
-	userpb.RegisterUserServer(grpcServer, &server.UserServer{})
+	userpb.RegisterGRPCUsersServiceServer(grpcServer, &server.GRPCUsersServiceServer{})
 
 	log.Printf("start gRPC server on %s port", portNumber)
 	if err := grpcServer.Serve(listener); err != nil {
